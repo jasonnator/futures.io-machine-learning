@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2050
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trading", "Trading\Trading.csproj", "{197BF97E-2897-41EF-B3F2-A703A5F1C49E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NinjaTrader.Trading", "NinjaTrader.Trading\NinjaTrader.Trading.csproj", "{197BF97E-2897-41EF-B3F2-A703A5F1C49E}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StartDetached", "StartDetached\StartDetached.vcxproj", "{EF3EE0A2-1081-4540-8EB7-32835D662DDC}"
 EndProject

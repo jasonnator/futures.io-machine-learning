@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace Trading
+namespace NinjaTrader.Trading
 {
     public static class AutoDebug
     {
