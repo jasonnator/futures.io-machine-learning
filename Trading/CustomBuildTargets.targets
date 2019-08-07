@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--This msbuild target is deliberately included in source control.  To not use it, simple comment out the Import tag in Trading.csproj-->
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <NinjaTraderDir>C:\Program Files (x86)\NinjaTrader 8\</NinjaTraderDir>
+    <NinjaTraderCustomDir>$(registry:HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders@Personal)\NinjaTrader 8\bin\Custom</NinjaTraderCustomDir>
+    <KillNinjaTraderCommand>$(ProjectDir)Libs\killninjatrader.cmd</KillNinjaTraderCommand>
+    <StartNinjaTraderCommand>"$(ProjectDir)Libs\startninjatrader.cmd"</StartNinjaTraderCommand>
+  </PropertyGroup>
+  
+  <!-- StartDetached project needs to be built first.  Then, copy the CtartDetached.exe to the NinjaTrader.Testing.Trading/Libs folder -->
+  <Target Name="CopyCmd" BeforeTargets="BeforeBuild">
+    <ItemGroup>
+      <NTBatchFiles Include="$(ProjectDir)Libs\killninjatrader.cmd" />
+      <NTBatchFiles Include="$(ProjectDir)Libs\startninjatrader.cmd" />
+    </ItemGroup>
+    <Message Importance="High" Text="Copying files @(NTBatchFiles)%(Filename)" />
+    <Copy SourceFiles="@(NTBatchFiles)" DestinationFolder="$(ProjectDir).build" SkipUnchangedFiles="false" />
+  </Target>
+  <Target Name="KillNT" DependsOnTargets="Build">
+    <Message Importance="High" Text="Shutting down NinjaTrader..." />
+    <Exec Command="killninjatrader.cmd" WorkingDirectory="$(ProjectDir).build" />
+  </Target>
+  <Target Name="CopyOut" AfterTargets="Build" DependsOnTargets="KillNT">
+    <ItemGroup>
+      <NTProjectFiles Include="$(OutputPath)$(ProjectName)$(TargetExt)" />
+    </ItemGroup>
+    <Copy SourceFiles="@(NTProjectFiles)"
+          DestinationFolder="$(registry:HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders@Personal)\NinjaTrader 8\bin\Custom"
+          SkipUnchangedFiles="false"
+    />
+    <Message Importance="High" Text="Copying compiled @(NTProjectFiles) to $(NinjaTraderCustomDir)" />
+  </Target>
+  <!-- TODO: this still isn't working properly, investigate -->
+  <!-- <Target Name="StartNT" DependsOnTargets="CopyOut">
+    <Message Importance="High" Text="Starting NinjaTrader..." />
+    <Exec Command="startninjatrader.cmd" WorkingDirectory="$(ProjectDir).build" />
+  </Target> -->
+</Project>
