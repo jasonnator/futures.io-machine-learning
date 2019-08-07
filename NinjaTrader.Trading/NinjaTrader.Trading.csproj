@@ -116,6 +116,7 @@
     <Compile Include="AutoDebug.cs" />
     <Compile Include="Indicator\_BareIndicator.cs" />
     <None Include="packages.config" />
+    <Compile Include="Strategy\_TensorFlowStrategyTest.cs" />
     <Compile Include="Strategy\_BareStrategy.cs" />
     <Compile Include="Strategy\_TemplateStrategy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

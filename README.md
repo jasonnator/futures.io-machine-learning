@@ -9,8 +9,8 @@ This is an open source, www.futures.io member-driven repository with a focus on 
 	- [x] Mount host directory into docker container
 	- [x] Unit test receive and parse prediction
 	- [ ] Container discover new saved models
- - [ ] Proof of concept call TensorFlow from within NT8
-	- [ ] Via WebRequest (default port 8501)
+ - [x] Proof of concept call TensorFlow from within NT8
+	- [x] Via WebRequest (default port 8501), see `_TensorFlowStrategyTest.cs`
 	- [ ] Via gRPC (default port 8500)
  - [ ] Basic TensorBoard dashboard 
 
